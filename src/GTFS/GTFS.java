@@ -6,6 +6,7 @@ import GTFS2Oudia.GtfsTrain;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class GTFS {
@@ -112,6 +113,59 @@ public class GTFS {
         for(String s :maxTrain.station){
             stationList.add(s);
         }
+        int decideNum=stationList.size();
+        for(GtfsTrain train :downGtfsTrain){
+            for(String station:train.station){
+                if(!stationList.contains(station)){
+                    stationList.add(station);
+                }
+            }
+        }
+        for(GtfsTrain train :upGtfsTrain){
+            for(String station:train.station){
+                if(!stationList.contains(station)){
+                    stationList.add(station);
+                }
+            }
+        }
+
+        //stationListには全ての駅が含まれる
+        //ある停留所に向けてどこからバスが来たか
+        HashSet<Integer>[]from=new HashSet[stationList.size()];
+        for(int i=0;i<from.length;i++){
+            from[i]=new HashSet<Integer>();
+        }
+        for(GtfsTrain train :downGtfsTrain){
+            int pos=0;
+            for(int i=0;i<train.station.size()-1;i++){
+                int startStation=stationList.subList(pos,stationList.size()).indexOf(train.station.get(i));
+                if(startStation<0){
+                    startStation=stationList.lastIndexOf(train.station.get(i));
+                }
+                int endStation=stationList.subList(startStation,stationList.size()).indexOf(train.station.get(i+1));
+                if(endStation<0){
+                    endStation=stationList.lastIndexOf(train.station.get(i));
+                }
+                from[endStation].add(startStation);
+            }
+        }
+
+        ArrayList<String>newList=new ArrayList[];
+        for(int i=decideNum;i<stationList.size();i++){
+
+            for(int j=0;j<i;j++){
+                if(arrow[i][j]>0){
+                    for(int k=i-1;k>=0;k--){
+                        if(arrow[k][i]>0){
+                            //行列入れ替え
+
+                        }
+                    }
+
+                }
+
+            }
+        }
 
         if(downGtfsTrain.contains(maxTrain)){
             downTrain.add(maxTrain);
@@ -120,6 +174,20 @@ public class GTFS {
             upTrain.add(maxTrain);
             upGtfsTrain.remove(maxTrain);
         }
+
+        for(GtfsTrain train :downGtfsTrain){
+            ArrayList<Integer>fitList=new ArrayList<>();
+            for(int i=0;i<stationList.size();i++){
+                int fit=0;
+                for(int j=0;(j<stationList.size()-i)&&(j<train.station.size());j++){
+                    if(stationList.get(j+i).equals(train.station.get(j))){
+                        fit++;
+                    }
+                }
+                fitList.add(fit);
+            }
+        }
+
 
 
     }
