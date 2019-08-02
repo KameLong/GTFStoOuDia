@@ -164,7 +164,7 @@ public class DiaFile {
      * 最小所要時間を計算する。
      * この関数は処理の完了までにかなりの時間がかかると予想されます。
      */
-    protected void calcMinReqiredTime(){
+    public  void calcMinReqiredTime(){
         new Thread(new Runnable() {
             @Override
             public void run() {

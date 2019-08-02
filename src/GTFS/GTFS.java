@@ -2,6 +2,9 @@ package GTFS;
 
 
 import GTFS2Oudia.GtfsTrain;
+import com.kamelong.OuDia.DiaFile;
+import com.kamelong.OuDia.Diagram;
+import com.kamelong.OuDia.Station;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -73,10 +76,7 @@ public class GTFS {
             e.printStackTrace();
         }
     }
-    public void parse2Oudia(){
-        String[] downRoute={"R011200001000000"};
-        String[] upRoute={"R011200001010000"};
-        String outpath="test.oud";
+    public void parse2Oudia(String[] downRoute,String[] upRoute,String outpath){
 
         //使用する下り列車
         ArrayList<GtfsTrain> downGtfsTrain =new ArrayList<>();
@@ -107,16 +107,10 @@ public class GTFS {
         }
         System.out.println(maxStops);
         System.out.println(maxTrain);
-        ArrayList<GtfsTrain> upTrain=new ArrayList<>();
-        ArrayList<GtfsTrain> downTrain=new ArrayList<>();
         ArrayList<String>stationList=new ArrayList<>();
         for(String s :maxTrain.station){
             stationList.add(s);
         }
-        for(String s :stationList){
-            System.out.println(stop.get(s).stop_name);
-        }
-        System.out.println("PPPPPP");
 
         for(GtfsTrain train :downGtfsTrain){
             int pos=0;
@@ -125,7 +119,7 @@ public class GTFS {
                     if(i==0){
                         stationList.add(0,train.station.get(i));
                     }else{
-                        stationList.add(pos,train.station.get(i));
+                        stationList.add(pos+1,train.station.get(i));
                     }
                     pos++;
                 }else{
@@ -150,8 +144,85 @@ public class GTFS {
 
             }
         }
-        for(String s :stationList){
-            System.out.println(stop.get(s).stop_name);
+        //stationList完成
+
+        for(GtfsTrain train :downGtfsTrain){
+            int pos=0;
+            for(int i=0;i<train.station.size();i++){
+                pos+=stationList.subList(pos,stationList.size()).indexOf(train.station.get(i));
+                train.stationIndex.add(pos);
+            }
+        }
+        for(GtfsTrain train :upGtfsTrain){
+            int pos=0;
+            for(int i=0;i<train.station.size();i++){
+                pos+=stationList.subList(pos,stationList.size()).indexOf(train.station.get(i));
+                train.stationIndex.add(pos);
+            }
+        }
+        //各駅にindexを割り振ることに成功
+        if(false) {
+            //デバッグ用
+            for (GtfsTrain train : downGtfsTrain) {
+                for (int i = 0; i < stationList.size(); i++) {
+                    if (train.stationIndex.contains(i)) {
+                        String station = train.station.get(train.stationIndex.indexOf(i));
+                        System.out.println(stop.get(station).stop_name);
+                    } else {
+                        System.out.println("ㇾ");
+                    }
+                }
+                System.out.println("eeee");
+            }
+            for (GtfsTrain train : upGtfsTrain) {
+                for (int i = 0; i < stationList.size(); i++) {
+                    if (train.stationIndex.contains(i)) {
+                        String station = train.station.get(train.stationIndex.indexOf(i));
+                        System.out.println(stop.get(station).stop_name);
+                    } else {
+                        System.out.println("ㇾ");
+
+                    }
+                }
+                System.out.println("eeee");
+            }
+        }
+
+        DiaFile diaFile=new DiaFile();
+        diaFile.name=route.get(downRoute[0]).route_name;
+        for(int i=0;i<stationList.size();i++){
+            Station station=new Station(diaFile);
+            station.name=stop.get(stationList.get(i)).stop_name;
+            if(i==0){
+                station.setShowArival(1,true);
+                station.setShowDepart(1,false);
+            }
+            if(i==stationList.size()-1){
+                station.setShowArival(0,true);
+                station.setShowDepart(0,false);
+            }
+            diaFile.station.add(station);
+        }
+        Diagram diagram=new Diagram(diaFile);
+        diagram.trains[0]=new ArrayList<>();
+        diagram.trains[1]=new ArrayList<>();
+        diagram.name="GTFS";
+        diaFile.diagram=new ArrayList<>();
+        diaFile.diagram.add(diagram);
+
+        for(GtfsTrain train : downGtfsTrain){
+            diagram.trains[0].add(train.toOuDiaTrain(diaFile,0));
+        }
+        for(GtfsTrain train : upGtfsTrain){
+            diagram.trains[1].add(train.toOuDiaTrain(diaFile,1));
+        }
+        diaFile.calcMinReqiredTime();
+        diagram.sortTrain(0,0);
+        diagram.sortTrain(1,diaFile.station.size()-1);
+        try {
+            diaFile.saveToFile(outpath, false);
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
 
