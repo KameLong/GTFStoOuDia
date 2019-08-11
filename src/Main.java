@@ -26,8 +26,7 @@ public class Main {
      * This propaty is ignored when loadFromArgs=true.
      * Software use args[1] as GTFSdirectory path when loadFromArgs=true.
      */
-    public static String GTFSdirectoryPath="";
-
+    public static String GTFSdirectoryPath="C:\\Users\\kame_\\Downloads\\20190529GTFS-dia\\gtfs-tokachi";
     /**
      * Software need additional files for convert.
      *
@@ -36,7 +35,7 @@ public class Main {
      * This file tell software which route convert to which oudia file and direction infomation.
      *
      *
-     * File format
+     * File
      * This file must be "tsv" format. Not a "csv"
      * =================
      * first column: GTFS's rotue id.
@@ -67,7 +66,7 @@ public class Main {
      * ３列目:OuDiaファイル名　OuDiaファイルIDが等しい行は同じ名前にするべきです。
      * ４列目:方向　0の時下り時刻表　1の時上り時刻表となります
      */
-    public static String convertInfoFilePath="";
+    public static String convertInfoFilePath="C:\\Users\\kame_\\ProgramingProject\\GTFStoOuDia\\input.txt";
 
     /**
      * User must use argument when loadFromArgs=true
