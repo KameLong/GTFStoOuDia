@@ -1,11 +1,21 @@
 package com.kamelong.tool;
 
+/*
+ * Copyright (c) 2019 KameLong
+ * contact:kamelong.com
+ *
+ * This source code is released under GNU GPL ver3.
+ */
+
 /**
  * java.awt.ColorはAndroidでは使えない
  * そもそもjava.awt.Colorはあまり好きではないのでColorクラスを自作
  */
 
-public class Color {
+public class Color implements Cloneable{
+    public static final Color BLACK=new Color("#000000");
+    public static final Color WHITE=new Color("#FFFFFF");
+
     private int alpha=255;
     private int red=0;
     private int green=0;
@@ -109,10 +119,9 @@ public class Color {
      * @param value
      */
     public void setOuDiaColor(String value){
-        red=Integer.parseInt(value.substring(6,8), 16);
-        green=Integer.parseInt(value.substring(4,6),16);
-        blue=Integer.parseInt(value.substring(2,4),16);
-
+            red = Integer.parseInt(value.substring(6, 8), 16);
+            green = Integer.parseInt(value.substring(4, 6), 16);
+            blue = Integer.parseInt(value.substring(2, 4), 16);
     }
 
 
@@ -151,5 +160,13 @@ public class Color {
             value=255;
         }
         blue=value;
+    }
+    public Color clone(){
+        try{
+            return (Color)super.clone();
+        }catch (CloneNotSupportedException e){
+            SDlog.log(e);
+            return new Color();
+        }
     }
 }

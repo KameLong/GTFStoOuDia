@@ -1,6 +1,16 @@
 package com.kamelong.tool;
 
-public class Font {
+/*
+ * Copyright (c) 2019 KameLong
+ * contact:kamelong.com
+ *
+ * This source code is released under GNU GPL ver3.
+ */
+
+/**
+ * フォントスタイル情報を管理する
+ */
+public class Font implements Cloneable{
     public static final Font OUDIA_DEFAULT=new Font("ＭＳ ゴシック",9,false,false);
     /**
      * フォント高さ
@@ -27,18 +37,28 @@ public class Font {
     public Font(){
 
     }
-    private Font(String name, int height, boolean bold, boolean itaric){
-        this.name=name;
-        this.height=height;
-        this.bold=bold;
-        this.itaric=itaric;
+    public Font(String value){
+        String[] valueList=value.split(";");
+        for(String s :valueList){
+            String t=s.split("=")[0];
+            String v=s.split("=")[1];
+            switch (t){
+                case"PointTextHeight":
+                    height=Integer.parseInt(v);
+                    break;
+                case "Facename":
+                    name=v;
+                    break;
+                case "Bold":
+                    bold=v.equals("1");
+                    break;
+                case "Itaric":
+                    itaric=v.equals("1");
+                    break;
+            }
+        }
     }
-
-    /**
-     * フォントをOuDia形式のテキストとして出力する
-     * @return
-     */
-    public StringBuilder font2OudiaFontTxt(){
+    public String getOuDiaString(){
         StringBuilder result=new StringBuilder();
         result.append("PointTextHeight=").append(height);
         if(name!=null){
@@ -52,7 +72,22 @@ public class Font {
         if(itaric){
             result.append("Itaric=1");
         }
-        return result;
+        return result.toString();
+    }
+    private Font(String name, int height, boolean bold, boolean itaric){
+        this.name=name;
+        this.height=height;
+        this.bold=bold;
+        this.itaric=itaric;
+    }
+
+    public Font clone(){
+        try {
+            return (Font) super.clone();
+        }catch (CloneNotSupportedException e){
+            SDlog.log(e);
+            return new Font();
+        }
     }
 
 

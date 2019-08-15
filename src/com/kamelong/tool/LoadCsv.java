@@ -2,19 +2,23 @@ package com.kamelong.tool;
 
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Csvファイルを読み込んで必要な情報を出力させるクラス
+
+/*
+ * Copyright (c) 2019 KameLong
+ * contact:kamelong.com
  *
+ * This source code is released under GNU GPL ver3.
  */
 
+/**
+ * Csvファイルを読み込んで必要な情報を出力させるクラス
+ */
 public class LoadCsv {
     ArrayList<String[]> data=new ArrayList<>();
     Map<String,Integer> headerMap=new HashMap<>();

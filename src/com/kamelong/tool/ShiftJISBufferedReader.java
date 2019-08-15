@@ -5,6 +5,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 
+/*
+ * Copyright (c) 2019 KameLong
+ * contact:kamelong.com
+ *
+ * This source code is released under GNU GPL ver3.
+ */
+
 /**
  * ShitJISに存在するだめ文字問題(0x5c問題)を回避するためのクラス
  */

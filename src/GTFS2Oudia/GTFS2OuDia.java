@@ -2,10 +2,9 @@ package GTFS2Oudia;
 
 import GTFS.GTFS;
 import com.kamelong.OuDia.DiaFile;
-import com.kamelong.OuDia.Diagram;
 import com.kamelong.OuDia.Station;
 import GTFS.*;
-import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 
 /**
@@ -151,39 +150,41 @@ public class GTFS2OuDia {
             }
         }
 
-        DiaFile diaFile = new DiaFile();
-        diaFile.name = lineName;
+        OuDiaDiaFileEdit diaFile = new DiaFile();
+        diaFile.getDiaFile().name=lineName;
         for (int i = 0; i < stationList.size(); i++) {
-            Station station = new Station(diaFile);
+            Station station =diaFile.addNewStation();
+
             station.name = gtfs.stop.get(stationList.get(i)).stop_name;
             if (i == 0) {
-                station.setShowArival(1, true);
-                station.setShowDepart(1, false);
+                station.showArrival[1]=true;
+                station.showDeparture[1]=false;
+                station.showArrivalCustom[1]=true;
+                station.showDepartureCustom[1]=false;
             }
             if (i == stationList.size() - 1) {
-                station.setShowArival(0, true);
-                station.setShowDepart(0, false);
+                station.showArrival[0]=true;
+                station.showDeparture[0]=false;
+                station.showArrivalCustom[0]=true;
+                station.showDepartureCustom[0]=false;
             }
-            diaFile.station.add(station);
         }
-        Diagram diagram = new Diagram(diaFile);
+        DiagramEditor diagram =diaFile.addNewDiagram();
         diagram.trains[0] = new ArrayList<>();
         diagram.trains[1] = new ArrayList<>();
-        diagram.name = "GTFS";
-        diaFile.diagram = new ArrayList<>();
-        diaFile.diagram.add(diagram);
+        diagram.setName("GTFS");
 
         for (GtfsTrain train : downGtfsTrain) {
-            diagram.trains[0].add(train.toOuDiaTrain(diaFile, 0));
+            diagram.trains[0].add(train.toOuDiaTrain(diaFile.getDiaFile(), 0));
         }
         for (GtfsTrain train : upGtfsTrain) {
-            diagram.trains[1].add(train.toOuDiaTrain(diaFile, 1));
+            diagram.trains[1].add(train.toOuDiaTrain(diaFile.getDiaFile(), 1));
         }
         diaFile.calcMinReqiredTime();
-        diagram.sortTrain(0, 0);
-        diagram.sortTrain(1, diaFile.station.size() - 1);
+        diagram.getEditor().sortTrain(0, 0);
+        diagram.getEditor(1, diaFile.getDiaFile().getStationNum() - 1);
         try {
-            diaFile.saveToFile(outputDirectoryPath+"/"+lineName+".oud", false);
+            diaFile.getDiaFile().saveToOuDiaFile(outputDirectoryPath+"/"+lineName+".oud");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -57,14 +57,14 @@ public class GtfsTrain extends Trip {
     }
 
     public Train toOuDiaTrain(DiaFile diaFile, int direction){
-        Train result=new Train(diaFile,direction);
+        OuDiaTrainEdit result=new TrainEditor(new Train(diaFile,direction));
         for(int i=0;i<diaFile.station.size();i++){
             int station=stationIndex.indexOf(i);
             if(station>=0){
                 StopTime stop=stopTimes.get(station*(1-2*direction)+direction*(stopTimes.size()-1));
                 result.setStopType(i,1);
-                result.setArrivalTime(i,timeString2Int(stop.arrival_time));
-                result.setDepartureTime(i,timeString2Int(stop.departure_time));
+                result.setAriTime(i,timeString2Int(stop.arrival_time));
+                result.setDepTime(i,timeString2Int(stop.departure_time));
             }else{
                 result.setStopType(i,2);
             }
@@ -85,6 +85,6 @@ public class GtfsTrain extends Trip {
 
             }
         }
-            return result;
+            return result.getTrain();
     }
 }

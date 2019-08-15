@@ -3,6 +3,9 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * GTFSの１フォルダを読み込むためのクラス
+ */
 public class GTFS {
     public String filePath;
     public Map<String ,Route> route=new HashMap<>();
