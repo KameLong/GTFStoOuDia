@@ -1,15 +1,6 @@
 package GTFS;
-
-
-import GTFS2Oudia.GtfsTrain;
-import com.kamelong.OuDia.DiaFile;
-import com.kamelong.OuDia.Diagram;
-import com.kamelong.OuDia.Station;
-
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 public class GTFS {
