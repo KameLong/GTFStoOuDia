@@ -17,9 +17,8 @@ import java.io.PrintWriter;
 public class TrainType implements Cloneable{
     /**
      種別名。
-     規定値は、空文字列。
      */
-    public String name="";
+    public String name="普通";
     /**
      略称（種別名の略称）。
      規定値は、空文字列。
@@ -29,7 +28,7 @@ public class TrainType implements Cloneable{
      時刻表文字色(ダイヤグラムの列車情報の文字色を兼ねます)
      規定値は、黒。
      */
-    public Color textColor=new Color();
+    public Color textColor=new Color("#000000");
     /**
      時刻表ビューで、この列車種別の時刻を表示するための時刻表フォント。
      範囲は、 0 以上、 JIKOKUHYOUFONT_COUNT 未満です。
@@ -44,14 +43,14 @@ public class TrainType implements Cloneable{
 
      規定値は、白。
      */
-    public Color timeTableBackColor=new Color();
+    public Color timeTableBackColor=new Color("#FFFFFF");
 
 
     /**
      * ダイヤ線色
      */
 
-    public Color diaColor=new Color();
+    public Color diaColor=new Color("#000000");
     /**
      列車線(直線)の線の形状属性。
      */
@@ -78,7 +77,7 @@ public class TrainType implements Cloneable{
     public int parentIndex=-1;
 
     public TrainType(){
-        name="新規種別";
+        name="普通";
     };
     void setValue(String title,String value){
         switch (title){

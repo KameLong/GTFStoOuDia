@@ -1,9 +1,10 @@
 package GTFS2Oudia;
 
 import GTFS.GTFS;
-import com.kamelong.OuDia.DiaFile;
-import com.kamelong.OuDia.Station;
+import com.kamelong.OuDia.*;
 import GTFS.*;
+import com.kamelong.OuDiaEditor.DiaFileEditor;
+import com.kamelong.OuDiaEditor.DiagramSorter;
 
 import java.util.ArrayList;
 
@@ -150,10 +151,11 @@ public class GTFS2OuDia {
             }
         }
 
-        OuDiaDiaFileEdit diaFile = new DiaFile();
-        diaFile.getDiaFile().name=lineName;
+        DiaFile diaFile = new DiaFile();
+        diaFile.name=lineName;
+        DiaFileEdit diaFileEdit=new DiaFileEditor(diaFile);
         for (int i = 0; i < stationList.size(); i++) {
-            Station station =diaFile.addNewStation();
+            Station station =diaFileEdit.addNewStation();
 
             station.name = gtfs.stop.get(stationList.get(i)).stop_name;
             if (i == 0) {
@@ -169,22 +171,23 @@ public class GTFS2OuDia {
                 station.showDepartureCustom[0]=false;
             }
         }
-        DiagramEditor diagram =diaFile.addNewDiagram();
+        diaFile.trainType.add(new TrainType());
+        Diagram diagram =diaFileEdit.addNewDiagram();
         diagram.trains[0] = new ArrayList<>();
         diagram.trains[1] = new ArrayList<>();
-        diagram.setName("GTFS");
+        diagram.name="GTFS";
 
         for (GtfsTrain train : downGtfsTrain) {
-            diagram.trains[0].add(train.toOuDiaTrain(diaFile.getDiaFile(), 0));
+            diagram.trains[0].add(train.toOuDiaTrain(diaFile, 0));
         }
         for (GtfsTrain train : upGtfsTrain) {
-            diagram.trains[1].add(train.toOuDiaTrain(diaFile.getDiaFile(), 1));
+            diagram.trains[1].add(train.toOuDiaTrain(diaFile, 1));
         }
-        diaFile.calcMinReqiredTime();
-        diagram.getEditor().sortTrain(0, 0);
-        diagram.getEditor(1, diaFile.getDiaFile().getStationNum() - 1);
+
+        DiagramSorter.sortTrain(diagram,0,0);
+        DiagramSorter.sortTrain(diagram,1,diaFile.getStationNum()-1);
         try {
-            diaFile.getDiaFile().saveToOuDiaFile(outputDirectoryPath+"/"+lineName+".oud");
+            diaFile.saveToOuDiaFile(outputDirectoryPath+"/"+lineName+".oud");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -4,14 +4,11 @@ import GTFS2Oudia.GTFS2OuDia;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * This softwere convert GTFS file to OuDia or OuDia2nd format file.
  * See http://take-okm.a.la9.jp/oudia/ about OuDia format file
- * See todo about OuDia2nd format file
  */
 public class Main {
     /**

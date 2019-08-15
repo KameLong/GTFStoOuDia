@@ -69,6 +69,10 @@ public class Train implements Cloneable{
     public Train(DiaFile diaFile, int direction) {
         this.diaFile = diaFile;
         this.direction = direction;
+        this.stationTimes=new ArrayList<>();
+        for(int i=0;i<diaFile.getStationNum();i++){
+            stationTimes.add(new StationTime(this));
+        }
     }
 
     /**

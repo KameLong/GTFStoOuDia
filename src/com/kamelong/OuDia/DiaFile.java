@@ -86,40 +86,40 @@ public class DiaFile {
      * 時刻表Vフォント
      * 縦書きに使う？
      */
-    public Font timeTableVFont=new Font();
+    public Font timeTableVFont=Font.OUDIA_DEFAULT;
     /**
      * ダイヤ駅名フォント
      */
-    public Font diaStationNameFont=new Font();
+    public Font diaStationNameFont=Font.OUDIA_DEFAULT;
     /**
      * ダイヤ時刻フォント
      */
-    public Font diaTimeFont=new Font();
+    public Font diaTimeFont=Font.OUDIA_DEFAULT;
 
     /**
      * ダイヤ列車フォント
      */
-    public Font diaTrainFont=new Font();
+    public Font diaTrainFont=Font.OUDIA_DEFAULT;
     /**
      * コメントフォント
      */
-    public Font commentFont=new Font();
+    public Font commentFont=Font.OUDIA_DEFAULT;
     /**
      * ダイヤ文字色
      */
-    public Color diaTextColor =new Color();
+    public Color diaTextColor =new Color("#000000");
     /**
      * ダイヤ背景色
      */
-    public Color diaBackColor=new Color();
+    public Color diaBackColor=new Color("#FFFFFF");
     /**
      * ダイヤ列車色
      */
-    public Color diaTrainColor=new Color();
+    public Color diaTrainColor=new Color("#000000");
     /**
      * ダイヤ軸色
      */
-    public Color diaAxicsColor=new Color();
+    public Color diaAxicsColor=new Color("C0C0C0");
     /**
      * 時刻表背景色
      */
@@ -491,6 +491,9 @@ public class DiaFile {
         for(Font font:timeTableFont){
             out.println("JikokuhyouFont="+font.getOuDiaString());
         }
+        for(int i=timeTableFont.size();i<8;i++){
+            out.println("JikokuhyouFont="+Font.OUDIA_DEFAULT.getOuDiaString());
+        }
         out.println("JikokuhyouVFont="+timeTableVFont.getOuDiaString());
         out.println("DiaEkimeiFont="+diaStationNameFont.getOuDiaString());
         out.println("DiaJikokuFont="+diaTimeFont.getOuDiaString());
@@ -551,6 +554,10 @@ public class DiaFile {
         for(Font font:timeTableFont){
             out.println("JikokuhyouFont="+font.getOuDiaString());
         }
+        for(int i=timeTableFont.size();i<8;i++){
+            out.println("JikokuhyouFont="+Font.OUDIA_DEFAULT.getOuDiaString());
+        }
+
         out.println("JikokuhyouVFont="+timeTableVFont.getOuDiaString());
         out.println("DiaEkimeiFont="+diaStationNameFont.getOuDiaString());
         out.println("DiaJikokuFont="+diaTimeFont.getOuDiaString());
@@ -611,6 +618,8 @@ public class DiaFile {
             return new DiaFile();
         }
     }
+
+
 
 
 

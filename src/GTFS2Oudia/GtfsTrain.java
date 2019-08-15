@@ -5,6 +5,7 @@ import GTFS.StopTime;
 import GTFS.Trip;
 import com.kamelong.OuDia.DiaFile;
 import com.kamelong.OuDia.Train;
+import com.kamelong.OuDiaEditor.TrainEditor;
 
 import java.util.ArrayList;
 import java.util.Map;
