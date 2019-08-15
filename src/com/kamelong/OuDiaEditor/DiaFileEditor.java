@@ -1,12 +1,17 @@
 package com.kamelong.OuDiaEditor;
 
-import GTFS2Oudia.DiaFileEdit;
+import com.kamelong.GTFS2Oudia.DiaFileEdit;
 import com.kamelong.OuDia.DiaFile;
 import com.kamelong.OuDia.Diagram;
 import com.kamelong.OuDia.Station;
 
 import java.util.ArrayList;
-
+/*
+ * Copyright (c) 2019 KameLong
+ * contact:kamelong.com
+ *
+ * This source code is released under GNU GPL ver3.
+ */
 public class DiaFileEditor implements DiaFileEdit {
     private DiaFile diaFile;
     public DiaFileEditor(DiaFile diaFile){

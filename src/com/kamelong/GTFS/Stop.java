@@ -1,5 +1,10 @@
-package GTFS;
-
+package com.kamelong.GTFS;
+/*
+ * Copyright (c) 2019 KameLong
+ * contact:kamelong.com
+ *
+ * This source code is released under GNU GPL ver3.
+ */
 public class Stop {
     public String stop_id;
     public String stop_name;

@@ -1,12 +1,17 @@
 package com.kamelong.OuDiaEditor;
 
-import GTFS2Oudia.OuDiaTrainEdit;
+import com.kamelong.GTFS2Oudia.OuDiaTrainEdit;
 import com.kamelong.OuDia.StationTime;
 import com.kamelong.OuDia.Train;
 import com.kamelong.tool.SDlog;
 
 import java.util.ArrayList;
-
+/*
+ * Copyright (c) 2019 KameLong
+ * contact:kamelong.com
+ *
+ * This source code is released under GNU GPL ver3.
+ */
 public class TrainEditor implements OuDiaTrainEdit {
     private Train train;
     public TrainEditor(Train train){

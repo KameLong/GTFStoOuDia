@@ -1,5 +1,10 @@
-package GTFS;
-
+package com.kamelong.GTFS;
+/*
+ * Copyright (c) 2019 KameLong
+ * contact:kamelong.com
+ *
+ * This source code is released under GNU GPL ver3.
+ */
 public class StopTime {
     public String trip_id;
     public String arrival_time;

@@ -1,13 +1,18 @@
-package GTFS2Oudia;
+package com.kamelong.GTFS2Oudia;
 
-import GTFS.GTFS;
+import com.kamelong.GTFS.GTFS;
 import com.kamelong.OuDia.*;
-import GTFS.*;
+import com.kamelong.GTFS.*;
 import com.kamelong.OuDiaEditor.DiaFileEditor;
 import com.kamelong.OuDiaEditor.DiagramSorter;
 
 import java.util.ArrayList;
-
+/*
+ * Copyright (c) 2019 KameLong
+ * contact:kamelong.com
+ *
+ * This source code is released under GNU GPL ver3.
+ */
 /**
  * GTFSをoudiaにコンバートするためのクラスです
  */
@@ -175,7 +180,7 @@ public class GTFS2OuDia {
         Diagram diagram =diaFileEdit.addNewDiagram();
         diagram.trains[0] = new ArrayList<>();
         diagram.trains[1] = new ArrayList<>();
-        diagram.name="GTFS";
+        diagram.name= "com/kamelong/GTFS";
 
         for (GtfsTrain train : downGtfsTrain) {
             diagram.trains[0].add(train.toOuDiaTrain(diaFile, 0));

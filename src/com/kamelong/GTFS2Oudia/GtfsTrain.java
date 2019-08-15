@@ -1,15 +1,20 @@
-package GTFS2Oudia;
+package com.kamelong.GTFS2Oudia;
 
-import GTFS.Stop;
-import GTFS.StopTime;
-import GTFS.Trip;
+import com.kamelong.GTFS.Stop;
+import com.kamelong.GTFS.StopTime;
+import com.kamelong.GTFS.Trip;
 import com.kamelong.OuDia.DiaFile;
 import com.kamelong.OuDia.Train;
 import com.kamelong.OuDiaEditor.TrainEditor;
 
 import java.util.ArrayList;
 import java.util.Map;
-
+/*
+ * Copyright (c) 2019 KameLong
+ * contact:kamelong.com
+ *
+ * This source code is released under GNU GPL ver3.
+ */
 public class GtfsTrain extends Trip {
     public ArrayList<Integer> stationIndex=new ArrayList<>();
     public ArrayList<String> station=new ArrayList<>();

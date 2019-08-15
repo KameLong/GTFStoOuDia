@@ -1,7 +1,12 @@
-package GTFS;
+package com.kamelong.GTFS;
 
 import java.util.ArrayList;
-
+/*
+ * Copyright (c) 2019 KameLong
+ * contact:kamelong.com
+ *
+ * This source code is released under GNU GPL ver3.
+ */
 public class Trip {
     public String route_id;
     public String service_id;

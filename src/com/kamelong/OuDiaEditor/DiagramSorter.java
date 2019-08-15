@@ -5,7 +5,12 @@ import com.kamelong.OuDia.Diagram;
 import com.kamelong.OuDia.Train;
 
 import java.util.ArrayList;
-
+/*
+ * Copyright (c) 2019 KameLong
+ * contact:kamelong.com
+ *
+ * This source code is released under GNU GPL ver3.
+ */
 public class DiagramSorter {
     /**
      * 時刻表を並び替える。

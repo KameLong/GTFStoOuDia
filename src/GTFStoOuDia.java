@@ -1,24 +1,29 @@
-import GTFS.GTFS;
-import GTFS2Oudia.GTFS2OuDia;
+import com.kamelong.GTFS.GTFS;
+import com.kamelong.GTFS2Oudia.GTFS2OuDia;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
-
+/*
+ * Copyright (c) 2019 KameLong
+ * contact:kamelong.com
+ *
+ * This source code is released under GNU GPL ver3.
+ */
 /**
- * This softwere convert GTFS file to OuDia or OuDia2nd format file.
+ * This softwere convert com.kamelong.GTFS file to OuDia or OuDia2nd format file.
  * See http://take-okm.a.la9.jp/oudia/ about OuDia format file
  */
-public class Main {
+public class GTFStoOuDia {
     /**
      * true:Software use command line argment for input.txt and output files info.
      * false:Software use source code propary for input.txt and output files info.
      */
     public static boolean loadFromArgs=false;
     /**
-     * directory path of input.txt GTFS
-     * GTFS's csv file (such as stops.txt and route.txt ...) must be contained in this directory.
+     * directory path of input.txt com.kamelong.GTFS
+     * com.kamelong.GTFS's csv file (such as stops.txt and route.txt ...) must be contained in this directory.
      *
      * This propaty is ignored when loadFromArgs=true.
      * Software use args[1] as GTFSdirectory path when loadFromArgs=true.
@@ -28,14 +33,14 @@ public class Main {
      * Software need additional files for convert.
      *
      * rroute.txt has many route and they don't seperate down or up timetable.
-     * User must pick up a few route from GTFS and mark direction.
+     * User must pick up a few route from com.kamelong.GTFS and mark direction.
      * This file tell software which route convert to which oudia file and direction infomation.
      *
      *
      * File
      * This file must be "tsv" format. Not a "csv"
      * =================
-     * first column: GTFS's rotue id.
+     * first column: com.kamelong.GTFS's rotue id.
      * second column: OuDia file's id. Same id's routes are converted to one OuDia file.
      * third column: OuDia files's name. third column's value should be same when second column's value are same of each row.
      * forth column: Direction for this route. Use 0 or 1 integer. When 0, this route treat as Down("Kudari"). When 1, this route treat as Up("Kudari).
@@ -71,9 +76,9 @@ public class Main {
      * @param args
      */
     public static void main(String[] args){
-        Main main=new Main(args);
+        GTFStoOuDia GTFStoOuDia =new GTFStoOuDia(args);
     }
-    public Main(String[] args){
+    public GTFStoOuDia(String[] args){
         try{
             if(loadFromArgs){
                 if(args.length<3){
